@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  rapidrecruit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rapidrecruit
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - HTTPS=true
+      - REACT_APP_API_UPLOAD_URL=http://172.178.94.66:8081/upload
+      - REACT_APP_API_RETRIEVE_URL=http://172.174.211.168:8000/question_answer
+      - REACT_APP_API_PERSONETICS_URL=http://172.174.211.168:8000/person_details
+      - REACT_APP_DEFAULT_API_TOKEN=testjwt
+      - REACT_APP_DEFAULT_COLLECTION=resumes
+    volumes:
+      - ./cert:/etc/nginx/cert
+
+
+
